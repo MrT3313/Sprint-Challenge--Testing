@@ -62,30 +62,16 @@ describe('POST /api/games', () => {
             releaseYear: 2077
         }
 
-        // await KNEX_DB('GAMES').insert(game)
-        const res = await supertest(server).post('/api/games').send(game).set('Accept', 'application/json')
-
-        // const res = await supertest(server).post('/api/games', game)
+        const res = await supertest(server).post('/api/games').send(game)
         expect(res.status).toBe(201)
         
-
-        // return supertest(server)
-        //     .post('/api/games')
-        //     .send(game)  
-        //     .then( res => {
-        //         expect(201)
-        //         // expect(res.status).toBe(201)
-        //     })
-            
-
-
-
-        // const res = await supertest(server)
-        //     .post('/api/games')
-        //     .send(game)
-        // expect(res.status).toBe(201)
     })
-    it('should return 422 w/ INCORRECT shape', () => {
-
+    it('should return 422 w/ INCORRECT shape', async () => {
+        const game = {
+            title: 'Watching Paint Dry: The Sequel',
+            releaseYear: 2077
+        }
+        const res = await supertest(server).post('/api/games').send(game);
+        expect(res.status).toBe(422);
     })
 })

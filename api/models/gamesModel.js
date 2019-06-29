@@ -11,5 +11,5 @@ async function insert(game) {
     return KNEX_DB('GAMES').where({ id }).first()
 }
 async function getAll() {
-    return null
+    return KNEX_DB('GAMES')
 }

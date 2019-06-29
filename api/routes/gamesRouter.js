@@ -30,46 +30,32 @@ const router = express.Router()
             releaseYear: INTEGER // not required
         }
     */
-    router.post('/', async (req,res) => {
+    router.post('/', validBody, async (req,res) => {
         console.log('gamesRouter post/')
-        console.log('req.body', req.body)
+        console.log('req.body -> POST ROUTE in gamesRouter', req.body)
 
 
-        if(req.body.title !== '' || req.body.genre !== '') {
-            
-            const newGame = await gamesModel.insert(req.body)
-            res.status(201).json( newGame )
-            
-            // KNEX_DB('GAMES')
-            //     .insert(newGame)
-            //     .then( result => {
-            //         res.status(201).json( result )
-            //     })
-        } else {
-            res.status(422).json({ message: 'Please Match Appropriate Shape of newGame'})
+        try {
+            const addedGame = await gamesModel.insert(req.body)
+            res.status(201).json(addedGame)
+        } catch (err) {
+            res.status(500).json({ message: 'Unable to POST new game to GAMES table'})
         }
-        
 
-
-        
-        
-        
-
-
-        // try {
-        //     const newGame = await gamesModel.insert(req.body)
-            
-        //     if(newGame) {
-        //         res.status(201).json( newGame )
-        //     } else {
-        //         res.status(422).json({ message: 'Please Match Appropriate Shape of newGame'})
-        //     }
-        // } catch {
-        //     res.status(500).json( { error: 'Unable to INSERT new game into GAMES table'} )
-        // }
     })
 // - PUT - //
 // - DEL - //
+
+// - MIDDLEWARE - //
+function validBody (req, res, next) {
+    console.log('BODY PASSED TO MIDDLEWARE',req.body)
+    console.log('validBody MIDDLEWARE')
+    if (!req.body.title || !req.body.genre){
+        res.status(422).json({ message: "Incomplete form. Please enter a title and genre" })
+    } else {
+        next();
+    }
+}
 
 // EXPORTS
     module.exports = router

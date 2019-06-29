@@ -29,7 +29,13 @@ describe('testing the games model', () => {
         })
     })
     describe('getAll()', () => {
+        // Cleanup
+        afterEach( async () => {
+            await KNEX_DB('GAMES').truncate()
+        })
+        
         it('should get all games', async () => {
+            // using model method
             await KNEX_DB('GAMES').insert([
                 {
                     title: 'Watching Paint Dry: The Sequel',
@@ -42,6 +48,12 @@ describe('testing the games model', () => {
                     releaseYear: 1234
                 }
             ])
+            // confirm with KNEX
+                const games = await KNEX_DB('GAMES')
+
+                expect(games).toHaveLength(2)
+                expect(games[0].title).toBe('Watching Paint Dry: The Sequel')
+
         })
     })
 })
