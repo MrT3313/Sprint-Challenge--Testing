@@ -1,8 +1,11 @@
+const supertest = require('supertest')
+
+const server = require('../server.js')
 const KNEX_DB = require('../../data/dbConfig.js')
 
 const gamesModel = require('./gamesModel.js')
 
-describe('the games model', () => {
+describe('testing the games model', () => {
     // INSERT
     describe('insert()', () => {
         // Cleanup
@@ -23,7 +26,22 @@ describe('the games model', () => {
 
                 expect(games).toHaveLength(1)
                 expect(games[0].title).toBe('Watching Paint Dry: The Sequel')
-                // expect(res.status).toBe(201)
+        })
+    })
+    describe('getAll()', () => {
+        it('should get all games', async () => {
+            await KNEX_DB('GAMES').insert([
+                {
+                    title: 'Watching Paint Dry: The Sequel',
+                    genre: 'Exhilarating Action RPG',
+                    releaseYear: 2077
+                },
+                {
+                    title: 'Measuring Grass Growth',
+                    genre: 'Personal Development',
+                    releaseYear: 1234
+                }
+            ])
         })
     })
 })
