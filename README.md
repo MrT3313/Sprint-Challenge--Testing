@@ -1,3 +1,4 @@
+INITIAL COMMIT
 # Sprint Challenge: Testing - TDD Video Games
 
 This challenge allows you to practice the concepts and techniques learned over the past week and apply them in a concrete project. This Sprint explored Testing. During this Sprint, you studied Introduction to Automated Testing, Testing React Applications & Testing Web APIs. In your challenge this week, you will demonstrate proficiency by creating an application that follows the TDD pattern to create a simple Web API using Node.js and Express.
@@ -25,8 +26,19 @@ In this challenge use `Test Driven Development` to build a RESTful API using Nod
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 1. In Jest, what are the differences between `describe()` and `it()` globals, and what are good uses for them?
+
+-describe breaks the test suite into components
+-it is what actually performs individual tests
+
 1. What is the point of `Test Driven Development`? What do you think about this approach?
+
+-the point of TDD is to build a more robust application that attempts to address all possible user edge cases. 
+
 1. Mention three types of automated tests.
+
+-Static Tests --> catch typos & type errors as you write the code
+-Unit Tests --> Verify that individual, isolated parts work as expected
+-Integration Tests --> Verify that several units work together in harmony 
 
 ## Project Set Up
 
